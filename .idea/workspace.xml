@@ -870,7 +870,7 @@
       <workItem from="1494515695844" duration="2780000" />
       <workItem from="1494695802701" duration="1718000" />
       <workItem from="1494730881032" duration="1341000" />
-      <workItem from="1494732424235" duration="1702000" />
+      <workItem from="1494732424235" duration="1726000" />
     </task>
     <task id="LOCAL-00001" summary="mybatics配资文件">
       <created>1494732664203</created>
@@ -900,11 +900,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494734588812</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="mybatics配资文件">
+      <created>1494734603974</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1494734603974</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49959000" />
+    <option name="totallyTimeSpent" value="49983000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1436" height="877" extended-state="0" />
