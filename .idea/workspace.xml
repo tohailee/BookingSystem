@@ -870,7 +870,7 @@
       <workItem from="1494515695844" duration="2780000" />
       <workItem from="1494695802701" duration="1718000" />
       <workItem from="1494730881032" duration="1341000" />
-      <workItem from="1494732424235" duration="1726000" />
+      <workItem from="1494732424235" duration="1761000" />
     </task>
     <task id="LOCAL-00001" summary="mybatics配资文件">
       <created>1494732664203</created>
@@ -907,11 +907,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494734603974</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="mybatics配资文件">
+      <created>1494734651047</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1494734651047</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49983000" />
+    <option name="totallyTimeSpent" value="50018000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1436" height="877" extended-state="0" />
@@ -965,8 +972,6 @@
     </ignored-roots>
     <MESSAGE value="mybatics配资文件" />
     <option name="LAST_COMMIT_MESSAGE" value="mybatics配资文件" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
