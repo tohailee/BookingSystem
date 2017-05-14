@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致
+ -->
+<mapper namespace="com.resource.mapper.RoleMapper">
+
+    <sql id="RoleColumn">
+        id, roleName, privileges,description
+    </sql>
+
+    <!--sql片段-->
+    <sql id="query_role_where">
+        <if test="role!=null">
+            <if test="role.roleName!=null and role.roleName!=''">
+                and role.roleName like '%${role.roleName}%'
+            </if>
+        </if>
+    </sql>
+
+    <!--&lt;!&ndash;条件查询模板&ndash;&gt;-->
+    <!--<select id="" parameterType="" resultType="User">-->
+        <!--SELECT-->
+        <!--<if test="distinct">-->
+            <!--DISTINCT-->
+        <!--</if>-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--FROM user-->
+        <!--<if test="parameter!=null">-->
+            <!--<include refid="query_user_where"/>-->
+        <!--</if>-->
+        <!--<if test="orderByClause != null">-->
+            <!--ORDER BY ${orderByClause}-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <insert id="addRole" parameterType="Role">
+        INSERT INTO role (id, roleName,description)
+        VALUES (#{id}, #{roleName},#{description})
+    </insert>
+
+    <update id="updateRole" parameterType="Role">
+        UPDATE role
+        SET roleName = #{username},description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteRole" parameterType="String">
+        DELETE FROM role
+        WHERE id = #{id}
+    </delete>
+
+    <!--&lt;!&ndash; mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 &ndash;&gt;-->
+    <!--<select id="getUserById" parameterType="String" resultType="User">-->
+        <!--SELECT-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--FROM user-->
+        <!--WHERE id = #{id,jdbcType=String}-->
+    <!--</select>-->
+
+    <!--<select id="getUserByName" parameterType="String" resultType="User">-->
+        <!--SELECT-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--FROM user-->
+        <!--WHERE user.username = #{username}-->
+    <!--</select>-->
+    <!---->
+    <!--<resultMap id="getUserAndRole" type="com.resource.entity.User.User">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="username" property="username"/>-->
+        <!--<result column="password" property="password"/>-->
+        <!--<result column="description" property="description"/>-->
+        <!--<association property="role" javaType="com.resource.entity.User.Role">-->
+            <!--<id column="id" property="id"/>-->
+            <!--<result column="roleName" property="roleName"/>-->
+            <!--<result column="description" property="description"/>-->
+            <!--<collection property="privileges" javaType="com.resource.entity.User.Privilege">-->
+                <!--<id column="id" property="id"/>-->
+                <!--<result column="privilegeType" property="privilegeType"/>-->
+                <!--<result column="description" property="description"/>-->
+            <!--</collection>-->
+        <!--</association>-->
+    <!--</resultMap>-->
+
+    <select id="getRoles" resultType="Role">
+        SELECT *
+        FROM role
+    </select>
+</mapper>

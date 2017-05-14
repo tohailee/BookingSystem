@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致
+ -->
+<mapper namespace="com.resource.mapper.UserMapper">
+    <!--<resultMap id="t_user" type="User">-->
+        <!--<id property="id" column="id" jdbcType="VARCHAR"/>-->
+        <!--<result property="username" column="username" jdbcType="VARCHAR"/>-->
+        <!--<result property="password" column="password" jdbcType="VARCHAR"/>-->
+        <!--<result property="role" column="role" jdbcType="Role"/>-->
+        <!--<result property="description" column="description" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
+
+    <sql id="UserColumn">
+        DISTINCT user.id, username, password, role.id, role.roleName, contact, createTime, lastLoginTime, user.description
+    </sql>
+
+    <!--sql片段-->
+    <sql id="query_user_where">
+        <if test="user!=null">
+            <if test="user.username!=null and user.username!=''">
+                and user.username like '%${user.username}%'
+            </if>
+            <if test="user.role!=null and user.role!=''">
+                and user.role = #{user.role}
+            </if>
+        </if>
+    </sql>
+
+    <!--&lt;!&ndash;条件查询模板&ndash;&gt;-->
+    <!--<select id="" parameterType="" resultType="User">-->
+        <!--SELECT-->
+        <!--<if test="distinct">-->
+            <!--DISTINCT-->
+        <!--</if>-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--FROM user-->
+        <!--<if test="parameter!=null">-->
+            <!--<include refid="query_user_where"/>-->
+        <!--</if>-->
+        <!--<if test="orderByClause != null">-->
+            <!--ORDER BY ${orderByClause}-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO user (id, username, password,role,description,createTime)
+        VALUES (#{id}, #{username}, #{password},#{role.id},#{description},#{createTime})
+    </insert>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE user
+        SET username = #{username}
+        <if test="password != null and password != ''">
+            , password = #{password}
+        </if>
+        <if test="role.id != null and role.id != ''">
+            ,role = #{role.id}
+        </if>
+        <if test="description != null and description != ''">
+            ,description = #{description}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="String">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+
+    <!-- mybatis_config中配置的alias类别名,也可直接配置resultType为类路劲 -->
+    <select id="getUserById" parameterType="String" resultMap="getUserAndRole">
+        SELECT
+        <include refid="UserColumn"/>
+        FROM user LEFT JOIN role
+        ON user.role = role.id
+        WHERE user.id = #{user.id}
+    </select>
+
+    <select id="getUserByName" parameterType="String" resultType="User">
+        SELECT
+        <include refid="UserColumn"/>
+        FROM user
+        WHERE user.username = #{username}
+    </select>
+
+    <!---->
+    <resultMap id="getUserAndRole" type="User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="contact" property="contact"/>
+        <result column="createTime" property="createTime"/>
+        <result column="lastLoginTime" property="lastLoginTime"/>
+        <result column="description" property="description"/>
+        <association property="role" javaType="Role">
+            <id column="id" property="id"/>
+            <result column="roleName" property="roleName"/>
+            <!--<result column="description" property="description"/>-->
+            <!--<collection property="privileges" javaType="com.resource.entity.User.Privilege">-->
+                <!--<id column="id" property="id"/>-->
+                <!--<result column="privilegeType" property="privilegeType"/>-->
+                <!--<result column="description" property="description"/>-->
+            <!--</collection>-->
+        </association>
+    </resultMap>
+
+    <select id="getUsers" resultMap="getUserAndRole">
+        SELECT
+        <include refid="UserColumn"/>
+        FROM user LEFT JOIN role
+        ON user.role = role.id;
+        <!--<if test="user != null">-->
+            <!--<if test="user.role != null and user.role != '' and user.role = role.roleId">-->
+                <!--ON user.role = role.roleId;-->
+            <!--</if>-->
+        <!--</if>-->
+    </select>
+</mapper>
